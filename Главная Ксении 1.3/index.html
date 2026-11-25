@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#f7f7f2">
   <meta name="description" content="Ксения Антипина, психолог, аккредитованный гештальт-терапевт, семейный терапевт и супервизор. Индивидуальная терапия и работа с парами.">
   <title>Ксения Антипина, психолог и гештальт-терапевт</title>
-  <link rel="stylesheet" href="main.css?v=1.6">
+  <link rel="stylesheet" href="main.css?v=1.7">
 </head>
 <body id="top">
   <a class="skip" href="#main">К содержанию</a>
@@ -83,28 +83,29 @@
         </div>
       </div>
       <ul class="credential-track" id="credential-track">
-        <li><a class="credential" href="credentials/02.jpg" aria-label="Открыть скан 1 из 10"><img src="credentials/02.webp" alt="" loading="lazy"></a></li>
-        <li><a class="credential" href="credentials/01.jpg" aria-label="Открыть скан 2 из 10"><img src="credentials/01.webp" alt="" loading="lazy"></a></li>
-        <li><a class="credential" href="credentials/03.jpg" aria-label="Открыть скан 3 из 10"><img src="credentials/03.webp" alt="" loading="lazy"></a></li>
-        <li><a class="credential" href="credentials/04.jpg" aria-label="Открыть скан 4 из 10"><img src="credentials/04.webp" alt="" loading="lazy"></a></li>
-        <li><a class="credential" href="credentials/05.jpg" aria-label="Открыть скан 5 из 10"><img src="credentials/05.webp" alt="" loading="lazy"></a></li>
-        <li><a class="credential" href="credentials/06.jpg" aria-label="Открыть скан 6 из 10"><img src="credentials/06.webp" alt="" loading="lazy"></a></li>
-        <li><a class="credential" href="credentials/07.jpg" aria-label="Открыть скан 7 из 10"><img src="credentials/07.webp" alt="" loading="lazy"></a></li>
-        <li><a class="credential" href="credentials/08.jpg" aria-label="Открыть скан 8 из 10"><img src="credentials/08.webp" alt="" loading="lazy"></a></li>
-        <li><a class="credential" href="credentials/09.jpg" aria-label="Открыть скан 9 из 10"><img src="credentials/09.webp" alt="" loading="lazy"></a></li>
-        <li><a class="credential" href="credentials/10.jpg" aria-label="Открыть скан 10 из 10"><img src="credentials/10.webp" alt="" loading="lazy"></a></li>
+        <li><a class="credential" href="credentials/02.jpg" aria-label="Открыть скан 1 из 10"><img src="credentials/02.webp" width="244" height="360" alt="" loading="lazy"></a></li>
+        <li><a class="credential" href="credentials/01.jpg" aria-label="Открыть скан 2 из 10"><img src="credentials/01.webp" width="460" height="345" alt="" loading="lazy"></a></li>
+        <li><a class="credential" href="credentials/03.jpg" aria-label="Открыть скан 3 из 10"><img src="credentials/03.webp" width="253" height="360" alt="" loading="lazy"></a></li>
+        <li><a class="credential" href="credentials/04.jpg" aria-label="Открыть скан 4 из 10"><img src="credentials/04.webp" width="460" height="345" alt="" loading="lazy"></a></li>
+        <li><a class="credential" href="credentials/05.jpg" aria-label="Открыть скан 5 из 10"><img src="credentials/05.webp" width="460" height="307" alt="" loading="lazy"></a></li>
+        <li><a class="credential" href="credentials/06.jpg" aria-label="Открыть скан 6 из 10"><img src="credentials/06.webp" width="258" height="360" alt="" loading="lazy"></a></li>
+        <li><a class="credential" href="credentials/07.jpg" aria-label="Открыть скан 7 из 10"><img src="credentials/07.webp" width="460" height="307" alt="" loading="lazy"></a></li>
+        <li><a class="credential" href="credentials/08.jpg" aria-label="Открыть скан 8 из 10"><img src="credentials/08.webp" width="270" height="360" alt="" loading="lazy"></a></li>
+        <li><a class="credential" href="credentials/09.jpg" aria-label="Открыть скан 9 из 10"><img src="credentials/09.webp" width="460" height="345" alt="" loading="lazy"></a></li>
+        <li><a class="credential" href="credentials/10.jpg" aria-label="Открыть скан 10 из 10"><img src="credentials/10.webp" width="460" height="345" alt="" loading="lazy"></a></li>
       </ul>
     </section>
 
     <section class="section projects" id="projects" aria-labelledby="projects-title" tabindex="-1">
       <h2 id="projects-title">Проекты</h2>
-      <div class="project">
-        <div>
+      <article class="project">
+        <div class="project-content">
           <h3>Моменты&nbsp;года</h3>
           <p>Настольная игра с&nbsp;вопросами о&nbsp;прожитом годе. Можно играть с&nbsp;близкими или&nbsp;наедине с&nbsp;собой.</p>
+          <a class="text-link" id="game-link" href="https://kseniaantipina.ru/momenty-goda" target="_top">К&nbsp;игре «Моменты&nbsp;года»</a>
         </div>
-        <a class="text-link" id="game-link" href="https://kseniaantipina.ru/momenty-goda" target="_top">К&nbsp;игре «Моменты&nbsp;года»</a>
-      </div>
+        <img class="project-image" src="momenty-goda/img/og.jpg" alt="" width="1200" height="630" loading="lazy">
+      </article>
     </section>
   </main>
 
@@ -208,10 +209,17 @@
       const button = event.target.closest('button');
       if (!button || button.getAttribute('aria-disabled') === 'true') return;
 
-      const [first, second] = track.children;
-      const distance = second.getBoundingClientRect().left - first.getBoundingClientRect().left;
+      const current = track.scrollLeft;
+      const origin = track.getBoundingClientRect().left - current;
+      const positions = Array.from(track.children, slide => slide.getBoundingClientRect().left - origin);
+      const forward = button.dataset.direction === '1';
+      const destination = forward
+        ? positions.find(position => position > current + 2)
+        : positions.reverse().find(position => position < current - 2);
+      if (destination === undefined) return;
+
       const behavior = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
-      track.scrollBy({ left: distance * Number(button.dataset.direction), behavior });
+      track.scrollTo({ left: destination, behavior });
     });
 
     const preview = document.querySelector('.preview-dialog');

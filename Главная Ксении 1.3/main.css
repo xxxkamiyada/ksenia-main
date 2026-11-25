@@ -48,8 +48,9 @@ h1 { font-size: clamp(3.3rem, 7.5vw, 6.75rem); line-height: .94; margin-bottom: 
 .portrait { width: min(100%, 28rem); justify-self: end; border-radius: clamp(1.1rem, 3vw, 1.85rem); overflow: hidden; background: #dfd4c7; }
 .portrait img { display: block; width: 100%; height: auto; }
 .section { border-top: 1px solid var(--line); padding-block: clamp(2.3rem, 5vw, 4rem); scroll-margin-top: 1rem; }
+.section:focus { outline: none; }
 h2 { font-size: clamp(2.4rem, 5vw, 3.45rem); line-height: 1.02; margin-bottom: 1.1rem; }
-.practice, .projects, .footer-inner { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(1rem, 6vw, 6rem); }
+.practice, .footer-inner { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(1rem, 6vw, 6rem); }
 .practice p, .project p { max-width: 36rem; color: var(--secondary); font-size: 1.075rem; }
 .practice p + p { margin-top: .85rem; }
 .fees h3 { font-size: 1.04rem; margin-bottom: .65rem; }
@@ -57,25 +58,28 @@ h2 { font-size: clamp(2.4rem, 5vw, 3.45rem); line-height: 1.02; margin-bottom: 1
 .fee dt { font-weight: 600; }
 .fee dt span { display: block; font-size: .91rem; font-weight: 400; color: var(--secondary); }
 .fee dd { font-weight: 650; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.education-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1.25rem; margin-bottom: 1.15rem; }
-.education-header h2 { margin: 0; }
-.carousel-controls:not([hidden]) { display: flex; gap: .5rem; }
+.education-header { display: flex; align-items: center; justify-content: space-between; gap: .75rem 1.25rem; }
+.education-header h2, .projects h2 { font-size: clamp(1.75rem, 4vw, 3rem); line-height: 1.1; margin: 0; }
+.education-header, .projects h2 { margin-bottom: clamp(2rem, 4vw, 3rem); }
+.carousel-controls:not([hidden]) { display: flex; flex: none; gap: .5rem; }
 .carousel-button { width: 2.75rem; height: 2.75rem; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--accent); font: inherit; font-size: 1.8rem; line-height: 1; cursor: pointer; }
 .carousel-button:hover:not([aria-disabled="true"]) { border-color: var(--accent); background: #e8ece3; }
 .carousel-button[aria-disabled="true"] { opacity: .45; cursor: default; }
 .carousel-button:focus-visible, .preview-close:focus-visible { outline: 2px solid #9c5b37; outline-offset: 3px; }
-.credential-track { display: grid; grid-auto-flow: column; grid-auto-columns: clamp(13rem, 30%, 19rem); gap: clamp(.7rem, 2vw, 1.4rem); list-style: none; padding: .25rem .25rem .75rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: .25rem; }
-.credential-track li { scroll-snap-align: start; }
-.credential { display: grid; place-items: center; height: clamp(11rem, 25vw, 17rem); cursor: zoom-in; }
-.credential:focus-visible { outline-offset: 1px; }
-.credential img { display: block; max-width: 100%; max-height: 100%; min-height: 0; object-fit: contain; box-shadow: 0 1px 3px #242b2326; }
+.credential-track { --scan-height: clamp(10.5rem, 19vw, 14.5rem); display: flex; gap: clamp(.875rem, 2.25vw, 1.5rem); list-style: none; padding: 0 0 .65rem; overflow-x: auto; scroll-snap-type: x mandatory; }
+.credential-track li { flex: none; scroll-snap-align: start; }
+.credential { display: block; cursor: zoom-in; }
+.credential:focus-visible { outline-offset: -2px; }
+.credential img { display: block; width: auto; height: var(--scan-height); box-shadow: 0 1px 3px #242b2326; }
 .preview-dialog { width: min(48rem, calc(100% - 2rem)); max-height: 92vh; padding: 1rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--paper); color: var(--ink); }
 .preview-dialog::backdrop { background: rgb(22 30 25 / .78); }
 .preview-header { display: flex; justify-content: flex-end; margin-bottom: .8rem; }
 .preview-close { font: inherit; font-size: .9rem; padding: .6rem .9rem; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); background: white; cursor: pointer; }
 .preview-image { display: block; width: 100%; height: auto; }
-.project { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .6rem 2rem; }
-.project h3 { font-size: 2rem; line-height: 1.1; margin-bottom: .4rem; }
+.project { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 1rem clamp(1rem, 3vw, 3rem); padding: clamp(1.3rem, 4vw, 3rem); border-radius: 1.25rem; background: #f4f0e5; }
+.project h3 { font-size: clamp(1.7rem, 4vw, 2.5rem); line-height: 1.12; margin-bottom: .65rem; }
+.project .text-link { margin-top: .9rem; }
+.project-image { display: block; justify-self: center; width: min(100%, 23rem); height: auto; }
 .footer { background: #e8ece3; padding-block: clamp(2.5rem, 5vw, 4rem); }
 .footer p { color: var(--secondary); }
 .links { display: flex; flex-wrap: wrap; gap: 0 1.25rem; margin-top: .4rem; }
@@ -97,17 +101,19 @@ h2 { font-size: clamp(2.4rem, 5vw, 3.45rem); line-height: 1.02; margin-bottom: 1
 }
 @media (max-width: 730px) {
   .wrap { width: calc(100% - 2.5rem); }
-  .hero, .practice, .projects, .footer-inner { grid-template-columns: 1fr; }
+  .hero, .practice, .footer-inner { grid-template-columns: 1fr; }
   .hero { padding-block: 2.5rem; gap: 1.8rem; }
   h1 { font-size: clamp(3rem, 12vw, 5rem); }
   .portrait { justify-self: start; width: min(100%, 28rem); }
-  .credential-track { grid-auto-columns: clamp(11rem, 66%, 17rem); }
-  .credential { height: clamp(12rem, 41vw, 16rem); }
-  .project { margin-top: -.25rem; }
+  .credential-track { --scan-height: clamp(8rem, 49vw, 13rem); }
+  .project { grid-template-columns: 1fr; }
+  .project-image { width: min(100%, 19rem); }
 }
 @media (max-width: 430px) {
   .header-inner { grid-template-columns: 1fr auto; }
   .menu-toggle { grid-column: 2; }
   .header .header-booking { display: none; }
   .header .menu-booking { display: inline-flex; justify-self: start; margin-top: .5rem; }
+  .education-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .65rem; }
+  .education-header h2 { font-size: clamp(1.35rem, 6.4vw, 1.75rem); text-wrap: balance; }
 }

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Моменты года · настольная игра-рефлексия</title>
+  <meta name="description" content="Вопросы, чтобы оглянуться на прожитый год и поговорить о нём с близкими. Бесплатная онлайн-версия и печатная колода.">
+  <meta name="theme-color" content="#F6F8FA">
+
+  <!-- Превью для соцсетей. Когда появится домен, замените относительный путь картинки на полный адрес. -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Моменты года">
+  <meta property="og:description" content="Карты с вопросами, чтобы оглянуться на прожитый год и поговорить о нём с близкими.">
+  <meta property="og:image" content="img/og.jpg">
+
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="img/icon-180.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preload" href="fonts/Geologica-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/Dudka_Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+
+<!-- Рисованные элементы: используются через <use href="#..."> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="hd-underline" viewBox="0 0 300 14"><path pathLength="1" d="M3 9.5C38 4.8 71 10.6 108 7.4S181 3.2 214 6.1 266 10.9 297 5.6"/></symbol>
+    <symbol id="hd-circle" viewBox="0 0 200 90"><path pathLength="1" d="M118 8.5C70 4 18 16 9.5 41.8 1.6 66 48 83.4 104 82.1 159 80.7 195 63 191.8 39.6 188.7 17 142 7.5 96 9.9 73 11.2 52 15.6 40 21"/></symbol>
+    <symbol id="hd-arrow" viewBox="0 0 120 80"><path pathLength="1" d="M6 10C30 6 63 13 80 31 92 44 95 58 92 71M78 58.5 92.5 72.5 106 56"/></symbol>
+    <symbol id="hd-star" viewBox="0 0 40 40"><path pathLength="1" d="M20.3 2.5C21.4 12 23.3 17.6 37.4 19.6 24.6 21.6 21.6 25.8 19.9 37.6 18.6 26.4 15.6 21.6 2.6 20.3 15.7 18.6 18.9 13.9 20.3 2.5Z"/></symbol>
+    <symbol id="hd-check" viewBox="0 0 40 40"><path pathLength="1" d="M5 21.5C9.6 24.4 12.9 28 15.6 33.2 21.2 20.6 27.7 12.1 36 5.5"/></symbol>
+    <symbol id="hd-tape" viewBox="0 0 90 26"><path d="M3 5.5 86.5 2 88 21 4.5 24.3 6.2 15.2Z"/></symbol>
+    <!-- символы с карт -->
+    <symbol id="i-sun" viewBox="614 612 175 187"><path d="M688.184 662.417C691.254 660.765 700.697 614.02 703.766 614.02C706.835 614.019 708.724 660.529 710.141 660.765C711.557 661.001 735.874 624.88 738.235 625.588C740.596 626.296 727.375 666.431 730.444 668.32C733.513 670.208 769.399 641.406 771.051 642.822C772.704 644.239 744.609 677.999 745.79 680.36C746.97 682.721 782.856 674.222 783.092 677.291C783.328 680.36 750.512 695.706 750.512 698.539C750.512 701.372 785.925 702.552 786.633 704.441C787.341 706.33 748.859 715.773 748.151 718.134C747.442 720.495 780.023 750.242 779.078 751.895C778.134 753.547 739.652 735.841 738.235 737.966C736.819 740.09 757.122 775.267 753.817 776.92C750.512 778.573 721.237 750.478 718.876 751.895C716.515 753.311 716.987 795.335 715.098 796.279C713.21 797.224 700.225 756.853 697.628 756.616C695.031 756.38 676.616 796.279 674.019 796.279C671.422 796.279 675.908 751.659 674.019 749.298C672.13 746.937 637.662 774.559 635.773 772.67C633.884 770.782 660.798 737.257 658.673 734.896C656.549 732.535 619.247 737.257 618.302 734.896C617.358 732.535 654.66 713.885 654.188 711.524C653.716 709.163 614.525 695.234 616.414 693.345C618.302 691.456 658.673 691.456 658.673 689.568C658.673 687.679 626.802 652.502 627.746 650.613C628.69 648.724 667.173 672.569 669.297 671.389C671.422 670.208 662.687 628.185 664.812 628.185C666.937 628.185 685.115 664.07 688.184 662.417ZM701.261 667.611C675.649 668.045 660.239 690.431 661.107 711.524C661.975 732.616 675.541 749.298 701.261 749.298C726.981 749.298 742.066 728.601 742.5 708.416C742.934 688.23 726.873 667.177 701.261 667.611Z" fill-rule="evenodd" clip-rule="evenodd"/><path d="M676.137 710.27C676.057 697.753 682.395 683.018 701.408 683.335C720.42 683.652 727.867 696.248 727.471 708.606C727.074 720.964 715.667 734.986 701.408 734.907C687.148 734.828 676.216 722.786 676.137 710.27Z"/></symbol>
+    <symbol id="i-moon" viewBox="643 1258 117 94"><path d="M714.842 1348.12C717.56 1348.75 680.004 1355.77 660.316 1337.67C640.628 1319.57 640.946 1292.58 660.316 1273.53C679.687 1254.48 717.267 1261.37 714.842 1262.12C691.803 1269.23 677.564 1285.24 677.564 1306.55C677.564 1327.87 695.723 1343.71 714.842 1348.12Z"/><path d="M738.753 1288.77C736.928 1288.77 735.864 1298.65 734.344 1300.33C732.823 1302 722.636 1302.15 722.484 1303.67C722.332 1305.19 731.303 1309.91 732.215 1310.97C733.127 1312.03 730.999 1320.85 732.215 1321.46C733.431 1322.07 739.513 1316.29 741.642 1316.29C743.77 1316.29 751.525 1321.46 752.437 1320.09C753.349 1318.72 748.484 1310.36 748.94 1308.99C749.396 1307.62 757.758 1302.3 757.302 1300.33C756.846 1298.35 745.747 1300.33 744.379 1298.65C743.01 1296.98 740.578 1288.77 738.753 1288.77Z"/></symbol>
+    <symbol id="i-heart" viewBox="634 584 135 157"><path d="M702.613 602.257C709.129 594.213 721.191 583.543 739.019 587.606C747.931 589.637 755.145 594.512 759.993 601.584C764.515 608.18 766.179 615.501 766.737 621.595C767.821 633.436 765.124 646.035 763.274 653.834C760.796 664.285 751.883 683.631 742.914 699.527C738.277 707.746 733.082 716.018 727.953 722.544L727.951 722.542C726.288 724.693 722.572 729.002 719.343 731.778L719.328 731.79L719.313 731.804C716.658 734.071 711.315 738.146 704.043 738.846C696.125 739.608 689.854 736.004 686.77 733.943C683.111 731.497 679.772 728.355 676.893 725.268C671.056 719.011 665.098 710.785 659.75 702.196C649.463 685.676 638.819 663.583 636.758 646.844C634.961 632.249 636.165 618.03 642.769 606.795C650.121 594.285 662.657 588.1 676.458 588.611C685.412 588.943 693.658 593.414 698.09 597.599C699.34 598.779 700.969 600.462 702.613 602.257ZM736.544 598.469C722.353 595.234 713.139 606.105 708.226 613.422C706.371 616.185 704.685 619.119 703.327 621.512L702.917 620.888C701.931 619.391 701.155 618.285 699.585 615.978C698.212 613.959 694.366 609.611 691.566 606.799L690.44 605.7C687.749 603.159 682.259 600.156 676.594 599.773L676.046 599.745C666.069 599.375 657.517 603.691 652.374 612.441C647.524 620.694 646.166 632.079 647.816 645.481C649.57 659.722 659.123 680.112 669.207 696.307C674.33 704.534 679.861 712.117 685.041 717.669C687.616 720.43 690.292 722.898 692.961 724.682C695.251 726.212 698.522 727.915 702.228 727.804L702.975 727.756C706.265 727.44 709.088 725.722 711.212 724.043L712.079 723.33C714.571 721.188 717.836 717.43 719.193 715.66C723.829 709.763 728.706 702.034 733.21 694.052C741.82 678.793 749.823 661.233 752.219 652.118L752.433 651.263C754.223 643.715 756.403 633.145 755.717 623.538L755.643 622.612C755.215 617.931 754.035 613.019 751.359 608.732L750.803 607.883C747.605 603.218 742.839 599.904 736.544 598.469Z"/><path d="M679.818 615.995C667.264 615.53 659.794 626.381 662.394 647.5C664.994 668.62 691.993 712.004 701.977 711.043C711.961 710.083 734.969 664.715 738.06 651.683C741.15 638.651 744.686 618.292 729.281 614.781C713.876 611.27 707.065 637.351 703.269 637.582C699.473 637.813 692.373 616.46 679.818 615.995Z"/></symbol>
+    <symbol id="i-star" viewBox="653 1250 97 130"><path d="M686.934 1302.92C680.688 1310.1 655.476 1308.45 655.08 1312.91C654.685 1317.37 681.703 1316.53 688.422 1323.11C695.141 1329.69 697.661 1377.57 701.581 1377.29C705.5 1377.01 707.18 1330.25 713.166 1323.11C719.153 1315.97 748.056 1314.15 747.916 1311.21C747.776 1308.27 719.1 1307.29 713.166 1302.92C707.233 1298.54 704.422 1252.95 699.738 1252.95C695.053 1252.95 693.18 1295.73 686.934 1302.92Z"/></symbol>
+    <symbol id="i-deer" viewBox="628 604 147 151"><path d="M765.093 606.962C772.798 605.697 774.523 617.485 770.843 632.205C767.163 646.925 740.138 654.572 734.733 656.527C731.615 657.655 728.838 660.993 727.048 663.783C726.315 664.926 725.949 665.497 726.048 666.162C726.05 666.18 726.053 666.198 726.056 666.216C726.175 666.877 726.84 667.409 728.169 668.473C729.718 669.713 730.492 670.333 731.096 670.348C731.117 670.348 731.124 670.348 731.145 670.348C731.748 670.347 732.494 669.777 733.986 668.638C740.717 663.497 753.312 657.695 767.599 662.097C768.652 662.422 769.179 662.584 769.531 663.087C769.884 663.59 769.858 664.116 769.806 665.168C769.359 674.212 763.431 688.537 742.23 690.029C740.444 690.154 739.551 690.217 739.072 690.723C738.592 691.229 738.578 692.1 738.55 693.841C738.219 714.204 730.633 749.568 701.496 752.979C701.496 752.979 701.496 752.98 701.496 752.98C701.496 752.98 701.496 752.98 701.496 752.98C672.358 749.568 664.772 714.204 664.441 693.84C664.413 692.099 664.399 691.229 663.919 690.723C663.44 690.217 662.547 690.154 660.762 690.028C639.561 688.537 633.632 674.212 633.185 665.168C633.133 664.116 633.107 663.59 633.46 663.087C633.813 662.584 634.339 662.422 635.392 662.097C649.68 657.695 662.274 663.497 669.005 668.638C670.497 669.777 671.243 670.347 671.847 670.348C671.867 670.348 671.875 670.348 671.896 670.348C672.499 670.333 673.273 669.713 674.822 668.473C676.152 667.409 676.816 666.877 676.935 666.216C676.938 666.198 676.941 666.18 676.944 666.162C677.043 665.497 676.676 664.926 675.943 663.783C674.153 660.993 671.377 657.655 668.258 656.527C662.853 654.572 635.828 646.924 632.148 632.205C628.468 617.485 630.193 605.697 637.898 606.962C645.603 608.227 640.313 618.922 642.613 625.765C644.913 632.607 645.603 632.722 648.593 628.007C651.583 623.292 649.456 620.877 651.985 617.542C654.515 614.207 661.473 613.862 662.451 622.142C663.428 630.422 655.321 637.552 656.011 638.184C656.701 638.817 668.658 644.106 668.833 643.36C669.005 642.612 668.201 632.32 674.238 629.732C680.275 627.145 683.84 632.722 682.345 636.805C680.85 640.887 679.356 647.499 680.505 649.742C681.387 651.461 685.218 655.842 687.46 659.429C688.404 660.939 688.876 661.694 689.372 661.917C689.868 662.141 690.642 662.011 692.192 661.751C696.67 661.001 700.337 660.869 701.495 660.869C702.653 660.869 706.321 661.002 710.8 661.752C712.349 662.011 713.124 662.141 713.619 661.918C714.115 661.695 714.587 660.939 715.531 659.429C717.773 655.842 721.604 651.461 722.486 649.742C723.636 647.499 722.141 640.887 720.646 636.805C719.151 632.722 722.716 627.145 728.754 629.732C734.791 632.32 733.986 642.611 734.159 643.36C734.332 644.107 746.288 638.818 746.981 638.185C747.671 637.552 739.563 630.422 740.541 622.142C741.518 613.862 748.476 614.207 751.006 617.542C753.536 620.877 751.409 623.292 754.398 628.007C757.388 632.722 758.079 632.607 760.379 625.765C762.678 618.922 757.389 608.227 765.093 606.962ZM701.495 720.248C694.758 720.248 688.456 721.964 689.923 726.388C691.39 730.812 695.387 738.202 701.495 738.203C707.605 738.203 711.601 730.812 713.068 726.389C714.535 721.965 708.233 720.248 701.495 720.248ZM691.617 698.1C691.617 690.266 679.378 688.995 679.378 698.1C679.378 707.204 691.617 705.934 691.617 698.1ZM723.613 698.1C723.613 688.995 711.375 690.266 711.375 698.1C711.375 705.934 723.613 707.205 723.613 698.1Z"/></symbol>
+    <symbol id="i-rabbit" viewBox="654 1247 95 131"><path d="M740.385 1249.55C741.705 1249.05 742.366 1248.81 742.991 1249.11C743.616 1249.42 743.822 1250.08 744.234 1251.4C748.298 1264.4 749.483 1289.28 727.888 1306.07C726.613 1307.06 725.976 1307.56 725.873 1308.18C725.769 1308.81 726.21 1309.47 727.09 1310.81C732.447 1318.94 739.745 1333.73 736.797 1344.71C732.643 1360.18 722.468 1361.63 721.638 1362.88C720.807 1364.12 718.731 1375.13 701.495 1375.13C684.26 1375.13 682.183 1364.12 681.353 1362.88C680.521 1361.63 670.347 1360.18 666.194 1344.71C663.246 1333.73 670.543 1318.94 675.901 1310.81C676.781 1309.47 677.221 1308.81 677.118 1308.18C677.015 1307.56 676.377 1307.06 675.103 1306.07C653.507 1289.28 654.692 1264.4 658.756 1251.4C659.168 1250.08 659.374 1249.42 659.999 1249.11C660.625 1248.81 661.285 1249.05 662.605 1249.55C685.93 1258.27 694.559 1278.37 696.563 1290.78C696.875 1292.72 697.032 1293.68 697.256 1293.99C697.481 1294.3 697.498 1294.32 697.841 1294.49C698.184 1294.66 699.287 1294.66 701.495 1294.66C703.703 1294.66 704.807 1294.66 705.15 1294.49C705.492 1294.32 705.509 1294.3 705.734 1293.99C705.959 1293.68 706.115 1292.72 706.427 1290.78C708.431 1278.37 717.06 1258.27 740.385 1249.55ZM705.741 1361.86C707.194 1360.38 707.92 1359.63 707.461 1358.63C707.402 1358.5 707.267 1358.29 707.169 1358.19C706.411 1357.38 705.49 1357.75 703.649 1358.5C702.447 1358.98 701.845 1359.22 701.57 1359.24C701.483 1359.24 701.508 1359.24 701.421 1359.24C701.146 1359.22 700.544 1358.98 699.341 1358.5C697.5 1357.75 696.579 1357.38 695.821 1358.19C695.723 1358.29 695.588 1358.5 695.529 1358.63C695.07 1359.63 695.796 1360.38 697.249 1361.86C698.1 1362.74 698.94 1363.51 699.685 1364.15C700.493 1364.84 700.897 1365.19 701.495 1365.19C702.094 1365.19 702.498 1364.84 703.306 1364.15C704.05 1363.51 704.891 1362.73 705.741 1361.86ZM686.419 1331.18C686.279 1320.36 676.239 1322.19 676.519 1331.74C676.8 1341.29 686.56 1341.99 686.419 1331.18ZM726.471 1331.74C726.752 1322.19 716.712 1320.36 716.571 1331.18C716.431 1341.99 726.191 1341.29 726.471 1331.74ZM669.628 1264.64C668.288 1263.95 667.618 1263.61 666.848 1264.07C666.078 1264.53 666.062 1265.3 666.03 1266.85C665.861 1274.96 669.271 1289 684.125 1300.36C684.718 1300.82 685.649 1300.69 686.242 1300.24C687 1299.66 687.565 1298.59 687.424 1297.64C685.924 1287.66 680.732 1270.34 669.628 1264.64ZM736.961 1266.85C736.929 1265.3 736.912 1264.53 736.142 1264.07C735.372 1263.61 734.702 1263.95 733.362 1264.64C722.258 1270.34 717.066 1287.66 715.567 1297.64C715.425 1298.59 715.991 1299.66 716.749 1300.24C717.342 1300.69 718.273 1300.82 718.865 1300.36C733.72 1289 737.129 1274.96 736.961 1266.85Z"/></symbol>
+    <!-- мягкие волны между секциями -->
+    <symbol id="wave-1" viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 52C180 18 330 10 520 34S880 86 1080 60 1340 18 1440 30V90H0Z"/></symbol>
+    <symbol id="wave-2" viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 30C220 64 400 80 640 54S1000 8 1220 26 1400 60 1440 56V90H0Z"/></symbol>
+    <symbol id="wave-3" viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 64C160 40 300 22 470 30S760 70 960 64 1300 20 1440 40V90H0Z"/></symbol>
+  </defs>
+</svg>
+
+<!-- ===== Шапка ===== -->
+<header class="site-header" id="site-header">
+  <div class="wrap header-in">
+    <a class="brand" href="#">
+      <span class="brand-name">Ксения Антипина</span>
+      <span class="brand-role">психолог, гештальт-терапевт</span>
+    </a>
+    <nav class="nav" aria-label="Разделы страницы">
+      <a href="#about" data-scroll>О проекте</a>
+      <a href="#decks" data-scroll>Разделы</a>
+      <a href="#how" data-scroll>Как играть</a>
+      <a href="#author" data-scroll>Об авторе</a>
+      <a href="#full" data-scroll>Печатная колода</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-primary btn-sm" href="#play">Играть онлайн</a>
+      <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Меню для телефона -->
+<div class="menu" id="menu" hidden>
+  <nav class="menu-in" aria-label="Разделы страницы">
+    <a href="#about" data-scroll>О проекте</a>
+    <a href="#for-whom" data-scroll>Для кого</a>
+    <a href="#decks" data-scroll>Разделы</a>
+    <a href="#how" data-scroll>Как играть</a>
+    <a href="#rules-full" data-scroll>Правила полностью</a>
+    <a href="#try" data-scroll>Выбрать карту</a>
+    <a href="#author" data-scroll>Об авторе</a>
+    <a href="#full" data-scroll>Печатная колода</a>
+    <a class="btn btn-primary" href="#play">Играть онлайн</a>
+  </nav>
+</div>
+
+<!-- ===== Главная ===== -->
+<main id="screen-home" class="screen home">
+
+  <!-- Первый экран -->
+  <section class="hero sec-night" data-dust>
+    <svg class="ico ico-star fig" style="--x:7%;--y:12%;--s:15px;--d:0s" aria-hidden="true"><use href="#i-star"/></svg>
+    <svg class="ico ico-star fig" style="--x:43%;--y:6%;--s:10px;--d:1.5s" aria-hidden="true"><use href="#i-star"/></svg>
+    <svg class="ico ico-star fig" style="--x:31%;--y:83%;--s:12px;--d:2.4s" aria-hidden="true"><use href="#i-star"/></svg>
+    <svg class="ico ico-star fig" style="--x:93%;--y:79%;--s:17px;--d:.8s" aria-hidden="true"><use href="#i-star"/></svg>
+    <div class="wrap hero-in">
+      <div class="hero-text">
+        <p class="eyebrow" data-reveal>Настольная игра-рефлексия</p>
+        <h1 class="hero-title" data-reveal>Моменты года</h1>
+        <p class="hero-lead" data-reveal>Вопросы, чтобы оглянуться на прожитый год и поговорить о нём с близкими.</p>
+        <div class="hero-actions" data-reveal>
+          <a class="btn btn-primary" href="#play">Играть онлайн</a>
+          <a class="link-quiet" href="#full" data-scroll>Печатная колода</a>
+        </div>
+        <p class="hero-note hero-note-d" data-reveal>Пробная онлайн-версия бесплатная: 20 вопросов из 78, регистрация не нужна.</p>
+      </div>
+
+      <div class="hero-visual">
+        <div class="orbit" aria-hidden="true"><svg class="ico ico-sun orb orb-sun"><use href="#i-sun"/></svg><svg class="ico ico-moon orb orb-moon"><use href="#i-moon"/></svg></div>
+        <div class="hero-deck tilt">
+          <img class="fan fan-1" src="img/back-family.svg" alt="">
+          <img class="fan fan-2" src="img/back-pair.svg" alt="">
+          <img class="fan fan-3" src="img/back-common.svg" alt="">
+          <div class="card hero-card static is-flipped" id="hero-card">
+            <span class="card-side card-face">
+              <span class="face-frame">
+                <img class="face-icon top" src="" alt="">
+                <span class="face-text"></span>
+                <img class="face-icon bot" src="" alt="">
+              </span>
+            </span>
+          </div>
+        </div>
+        <svg class="hd hd-star s1"><use href="#hd-star"/></svg>
+        <svg class="hd hd-star s2"><use href="#hd-star"/></svg>
+        <svg class="hd hd-star s3"><use href="#hd-star"/></svg>
+        <span class="hand-note">один из<br>78 вопросов
+          <svg class="hd hd-arrow"><use href="#hd-arrow"/></svg>
+        </span>
+      </div>
+      <p class="hero-note hero-note-m">Пробная онлайн-версия бесплатная: 20 вопросов из 78, регистрация не нужна.</p>
+    
+    </div>
+  </section>
+
+  <!-- О проекте -->
+  <section class="sec wavy w3 sec-light about" id="about">
+    <svg class="wave" aria-hidden="true"><use href="#wave-3"/></svg>
+    <div class="wrap about-in">
+      <div class="about-text">
+        <h2 class="sec-title" data-reveal>О проекте</h2>
+        <p class="lead-big" data-reveal>Автор игры и вопросов Ксения Антипина, психолог и гештальт-терапевт.</p>
+        <p data-reveal>Игроки по очереди тянут карту, отвечают на вопрос и слушают друг друга. Оценок и правильных ответов нет, торопиться некуда. Ксения хотела, чтобы людям было хорошо вместе и чтобы они становились ближе.</p>
+        <p data-reveal>Оглянуться на год можно в любое время: в день рождения, в годовщину, на семейной встрече или в обычный день без повода.</p>
+      </div>
+      <div class="about-visual tilt" data-reveal>
+        <figure class="card av-card is-flipped static" data-deck="common">
+          <span class="card-side card-face"><span class="face-frame">
+            <img class="face-icon top" src="img/common-top.svg" alt="">
+            <span class="av-quote"><span class="p">Нет времени, которое было бы неважным.</span><span class="p">Важно всё.</span></span>
+            <span class="av-sign">Ксения Антипина</span>
+          </span></span>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Для кого -->
+  <section class="sec wavy w2 sec-sky" id="for-whom">
+    <svg class="wave" aria-hidden="true"><use href="#wave-2"/></svg>
+    <svg class="pattern pattern-family" aria-hidden="true"><defs><pattern id="pt-family" width="150" height="190" patternUnits="userSpaceOnUse"><use href="#i-deer" x="22" y="18" width="40" height="40"/><use href="#i-rabbit" x="98" y="112" width="30" height="40"/></pattern></defs><rect width="100%" height="100%" fill="url(#pt-family)"/></svg>
+    <div class="wrap for-in">
+      <div>
+        <h2 class="sec-title" data-reveal>Для кого</h2>
+        <ul class="checks">
+          <li data-reveal><svg class="ico ico-star check-star" aria-hidden="true"><use href="#i-star"/></svg>Друзьям за праздничным столом</li>
+          <li data-reveal><svg class="ico ico-star check-star" aria-hidden="true"><use href="#i-star"/></svg>Паре в годовщину или просто вдвоём</li>
+          <li data-reveal><svg class="ico ico-star check-star" aria-hidden="true"><use href="#i-star"/></svg>Семье, где за столом собираются разные поколения</li>
+          <li data-reveal><svg class="ico ico-star check-star" aria-hidden="true"><use href="#i-star"/></svg>Себе: на вопросы можно отвечать наедине</li>
+        </ul>
+      </div>
+      <div class="yearline" data-reveal>
+        <p class="yearline-title">Новый год не единственный повод</p>
+        <div class="yearline-track">
+          <svg class="yearline-thread" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70C90 40 160 34 250 58S420 104 520 76 700 22 800 46 940 92 1000 66" pathLength="1"/></svg>
+          <ol class="yearline-points">
+          <li style="--i:0;--y:50px"><svg class="ico" aria-hidden="true"><use href="#i-moon"/></svg><span>31 декабря</span></li>
+          <li style="--i:1;--y:58px"><svg class="ico" aria-hidden="true"><use href="#i-sun"/></svg><span>день рождения</span></li>
+          <li style="--i:2;--y:90px"><svg class="ico" aria-hidden="true"><use href="#i-heart"/></svg><span>годовщина</span></li>
+          <li style="--i:3;--y:62px"><svg class="ico" aria-hidden="true"><use href="#i-deer"/></svg><span>семейная встреча</span></li>
+          <li style="--i:4;--y:38px"><svg class="ico" aria-hidden="true"><use href="#i-star"/></svg><span>обычный вторник</span></li>
+          <li style="--i:5;--y:78px"><svg class="ico" aria-hidden="true"><use href="#i-rabbit"/></svg><span>без повода</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Момент: созвездие и цитата проступают при прокрутке -->
+  <section class="sec wavy w3 sec-night moment" data-dust>
+    <svg class="skymap" data-sky="moment" aria-hidden="true"></svg>
+    <svg class="wave" aria-hidden="true"><use href="#wave-3"/></svg>
+    <div class="wrap">
+      <svg class="constellation c-moment" data-shape="deer" aria-hidden="true"></svg>
+      <p class="moment-line" data-words>Надо бы так устроить жизнь, чтобы каждое мгновение в ней было значительно.</p>
+      <p class="moment-cite">И. С. Тургенев, «Отцы и дети»</p>
+    </div>
+  </section>
+
+  <!-- Колоды: свободная раскладка, как на столе -->
+  <section class="sec wavy w1 sec-light" id="decks">
+    <svg class="wave" aria-hidden="true"><use href="#wave-1"/></svg>
+    <div class="wrap">
+      <h2 class="sec-title" data-reveal>Что в колоде</h2>
+      <p class="prose decks-lead" data-reveal>В коробке 78 карт. Брать их можно из любого раздела и в любом количестве.</p>
+      <div class="table">
+        <article class="pile pile-1" data-reveal>
+          <div class="pile-cards tilt">
+            <img class="pc pc-back" src="img/back-common.svg" alt="Рубашка общего раздела">
+            <img class="pc pc-b pc-b2" src="img/back-common.svg" alt="">
+            <div class="card pc pc-a static is-flipped" data-card="1"><span class="card-side card-face"><span class="face-frame"><img class="face-icon top" src="" alt=""><span class="face-text"></span><img class="face-icon bot" src="" alt=""></span></span></div>
+          </div>
+          <div class="pile-text">
+            <h3>Общий</h3>
+            <p class="deck-count">54 вопроса</p>
+            <p>О годе, о себе, о важном и трудном. Подходит любой компании и для разговора с собой.</p>
+          </div>
+        </article>
+        <article class="pile pile-2" data-reveal>
+          <div class="pile-cards tilt">
+            <img class="pc pc-back" src="img/back-pair.svg" alt="Рубашка раздела для пары">
+            <img class="pc pc-b pc-b2" src="img/back-pair.svg" alt="">
+            <div class="card pc pc-a static is-flipped" data-card="73"><span class="card-side card-face"><span class="face-frame"><img class="face-icon top" src="" alt=""><span class="face-text"></span><img class="face-icon bot" src="" alt=""></span></span></div>
+          </div>
+          <div class="pile-text">
+            <h3>Для пары</h3>
+            <p class="deck-count">12 вопросов</p>
+            <p>О близости, поддержке, общих воспоминаниях и мечтах.</p>
+          </div>
+        </article>
+        <article class="pile pile-3" data-reveal>
+          <div class="pile-cards tilt">
+            <img class="pc pc-back" src="img/back-family.svg" alt="Рубашка раздела для семьи">
+            <img class="pc pc-b pc-b2" src="img/back-family.svg" alt="">
+            <div class="card pc pc-a static is-flipped" data-card="60"><span class="card-side card-face"><span class="face-frame"><img class="face-icon top" src="" alt=""><span class="face-text"></span><img class="face-icon bot" src="" alt=""></span></span></div>
+          </div>
+          <div class="pile-text">
+            <h3>Для семьи</h3>
+            <p class="deck-count">12 вопросов</p>
+            <p>О традициях и общих историях, о том, что помогает чувствовать себя частью семьи.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Как играть -->
+  <section class="sec wavy w1 sec-sky" id="how">
+    <svg class="wave" aria-hidden="true"><use href="#wave-1"/></svg>
+    <div class="wrap">
+      <h2 class="sec-title" data-reveal>Как играть</h2>
+      <ol class="steps">
+        <li data-reveal>
+          <svg class="ico ico-sun step-ico" aria-hidden="true"><use href="#i-sun"/></svg>
+          <h3>Выберите разделы</h3>
+          <p>Общий подходит любой компании. Разделы для пары и для семьи добавьте, если за столом пара или несколько поколений.</p>
+          <span class="margin-note">порядок и количество не важны</span>
+        </li>
+        <li data-reveal>
+          <svg class="ico ico-sun step-ico" aria-hidden="true"><use href="#i-sun"/></svg>
+          <h3>Выберите карту</h3>
+          <p>Прочитайте вопрос вслух и ответьте так, как хочется, коротко или подробно.</p>
+          <span class="margin-note">можно пропустить карту</span>
+        </li>
+        <li data-reveal>
+          <svg class="ico ico-sun step-ico" aria-hidden="true"><use href="#i-sun"/></svg>
+          <h3>Передайте слово</h3>
+          <p>Отвечает каждый, кто хочет. Остальные слушают и не торопят.</p>
+          <span class="margin-note">можно просто слушать</span>
+        </li>
+      </ol>
+
+      <details class="rules-full" id="rules-full" data-reveal>
+        <summary>Правила полностью</summary>
+        <div class="rules-body">
+<p>Правил нет, есть рекомендации. Цель игры не в том, чтобы пройти колоду до конца и ответить на каждый вопрос. Цель в том, чтобы заметить, каким был этот год, и побыть в этом опыте рядом с близкими.</p>
+
+    <h2>Выбирайте карты так, как хочется</h2>
+    <p>Можно вытянуть одну карту на всех, можно по одной каждому, можно разложить несколько и выбрать ту, что больше нравится. Можно и не тянуть, а просто листать, читать и выбирать вопрос поинтереснее. Порядок и количество не важны.</p>
+
+    <h2>Отвечать любой ценой не нужно</h2>
+    <p>Вопрос не экзамен, а повод поразмышлять. Можно ответить коротко, можно надолго задуматься, можно пропустить карту или вернуться к ней позже. Ценность в самом размышлении: заметить, удивиться, присвоить и ассимилировать опыт.</p>
+
+    <h2>Слушайте и делитесь сами</h2>
+    <p>Каждый участник может делиться своими мыслями, а может просто слушать. Нет правильных и неправильных ответов, нет обязательных реакций. Важно давать друг другу время и не торопить.</p>
+
+    <h2>Новый год не единственный повод</h2>
+    <p>Колодой можно пользоваться в любую значимую дату: в день рождения, в годовщину свадьбы или знакомства, в день рождения детей, да и просто так, без повода. Подойдёт любой момент, когда хочется оглянуться и заметить свой опыт.</p>
+
+    <h2>В колоде три раздела</h2>
+    <ul class="sections">
+      <li><img src="img/common-top.svg" alt=""><span><b>Общие карты (54):</b> о годе, о себе, о том, что было важным и трудным. Подходят для любого круга и для разговора наедине с собой.</span></li>
+      <li><img src="img/pair-top.svg" alt=""><span><b>Для пары (12):</b> о близости, поддержке, общих воспоминаниях и мечтах двоих.</span></li>
+      <li><img src="img/family-top.svg" alt=""><span><b>Для семьи (12):</b> о традициях, общих историях и о том, что помогает чувствовать себя частью большой семьи.</span></li>
+    </ul>
+    <p>Не обязательно идти по порядку: можно брать карты из любого раздела и в любом количестве.</p>
+
+    <h2>Зачем это всё</h2>
+    <p>Нет времени, которое было бы неважным. Важно всё. Жизнь уже происходит, она не проходит мимо, она случается каждый день. Что её наполняет? Какие события стали значимыми? Где вы очень постарались, а в чём приходилось справляться? Важно давать себе время на ответ: думать, размышлять и предаваться удовольствию от сопричастности.</p>
+        </div>
+      </details>
+
+      <div class="row-actions" data-reveal>
+        <a class="btn btn-primary" href="#play">Играть онлайн</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Выберите карту: расклад рубашкой вверх -->
+  <section class="sec wavy w2 sec-blue" id="try" data-dust>
+    <svg class="wave" aria-hidden="true"><use href="#wave-2"/></svg>
+    <div class="wrap try-grid">
+      <div class="try-head">
+        <h2 class="sec-title" data-reveal>Выберите карту</h2>
+        <p class="prose" data-reveal>Карты лежат рубашкой вверх. Выберите ту, что больше нравится, и она откроется.</p>
+      </div>
+      <div class="try-stage">
+        <div class="spread spread-home" id="try-spread"></div>
+        <div class="card try-card" id="try-card" hidden>
+          <div class="card-inner">
+            <span class="card-side card-back"><img src="img/back-common.svg" alt=""></span>
+            <span class="card-side card-face">
+              <span class="face-frame">
+                <img class="face-icon top" src="" alt="">
+                <span class="face-text" aria-live="polite"></span>
+                <img class="face-icon bot" src="" alt="">
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="try-after" id="try-after">
+        <p class="try-deck" id="try-deck"></p>
+        <div class="minute on-dark" id="try-minute" hidden></div>
+        <div class="try-actions" id="try-actions" hidden>
+          <button type="button" class="btn btn-light" id="try-again">Разложить заново</button>
+          <a class="link-quiet on-dark" href="#play">Играть онлайн</a>
+        </div>
+        <p class="try-more" id="try-more" hidden>В печатной колоде 78 вопросов. <a class="link-quiet on-dark" href="#full" data-scroll>О печатной колоде</a></p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Об авторе -->
+  <section class="sec wavy w3 sec-light" id="author">
+    <svg class="wave" aria-hidden="true"><use href="#wave-3"/></svg>
+    <div class="wrap author-in">
+      <div class="author-photo" data-reveal>
+        <svg class="hd hd-circle author-ring" aria-hidden="true"><use href="#hd-circle"/></svg>
+        <div class="ph ph-round"><span>Фото Ксении</span></div>
+      </div>
+      <div>
+        <h2 class="sec-title" data-reveal>Ксения Антипина</h2>
+        <p class="author-role" data-reveal>Психолог, гештальт-терапевт. Автор вопросов.</p>
+        <p class="prose placeholder" data-reveal>Здесь будет короткий рассказ о Ксении: подход, опыт, с какими запросами работает, почему появилась эта игра.</p>
+        <div class="row-actions" data-reveal>
+          <span class="link-soon">Блог (ссылка будет)</span>
+          <span class="link-soon">Консультации (ссылка будет)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Полная версия -->
+  <section class="sec wavy w1 sec-night" id="full" data-dust>
+    <svg class="wave" aria-hidden="true"><use href="#wave-1"/></svg>
+    <svg class="pattern pattern-common" aria-hidden="true"><defs><pattern id="pt-common" width="140" height="180" patternUnits="userSpaceOnUse"><use href="#i-sun" x="20" y="16" width="38" height="40"/><use href="#i-moon" x="90" y="108" width="36" height="30"/></pattern></defs><rect width="100%" height="100%" fill="url(#pt-common)"/></svg>
+    <div class="wrap print-in">
+      <div class="photos" data-reveal>
+        <figure class="photo"><svg class="tape" aria-hidden="true"><use href="#hd-tape"/></svg><div class="ph"><span>Фото колоды</span></div></figure>
+        <figure class="photo"><svg class="tape" aria-hidden="true"><use href="#hd-tape"/></svg><div class="ph"><span>Фото колоды</span></div></figure>
+      </div>
+      <div>
+        <h2 class="sec-title" data-reveal>Печатная колода</h2>
+        <p class="prose" data-reveal>78 вопросов, чтобы спокойно оглянуться на год: за праздничным столом, вдвоём или наедине с собой. В колоде три раздела. Общий подходит любой компании, а разделы для пары и для семьи можно добавить, когда за столом пара или несколько поколений. Колоду можно подарить тем, с кем хочется поговорить о прожитом годе.</p>
+        <p class="print-specs" data-reveal>Карты 70 × 120 мм. 54 общих вопроса, 12 для пары, 12 для семьи</p>
+        <div class="row-actions" data-reveal>
+          <a class="btn btn-light" id="print-link" href="#full" target="_blank" rel="noopener" hidden>Купить печатную колоду</a>
+          <p class="print-soon" id="print-soon">Ссылка на покупку появится здесь.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== Выбор колод ===== -->
+<main id="screen-play" class="screen page" hidden>
+  <div class="wrap narrow">
+    <a class="back" href="#">← На главную</a>
+    <h1 class="page-title">Какие разделы берём</h1>
+    <p class="lead">Перед началом можно заглянуть в <a class="link-quiet" href="#rules">правила</a>.</p>
+
+    <div id="resume" class="resume" hidden>
+      <p id="resume-text"></p>
+      <button type="button" class="btn btn-primary" id="btn-resume">Продолжить игру</button>
+    </div>
+
+    <form id="deck-form" class="decks">
+      <fieldset>
+        <legend class="sr-only">Разделы</legend>
+        <div id="deck-options" class="deck-options"></div>
+      </fieldset>
+      <p class="hint" id="deck-hint">Выберите хотя бы один раздел.</p>
+      <button type="submit" class="btn btn-primary btn-wide" id="btn-start">Начать игру</button>
+    </form>
+    <p class="play-note">В пробной онлайн-версии 20 вопросов из 78. Ход игры сохраняется только в этом браузере.</p>
+  </div>
+</main>
+
+<!-- ===== Игра ===== -->
+<main id="screen-game" class="screen game" hidden>
+  <div class="topbar">
+    <button type="button" class="link-btn" id="btn-to-start" aria-label="К выбору разделов">← Разделы</button>
+    <span class="counter" id="counter" aria-live="polite"></span>
+    <button type="button" class="link-btn" id="btn-reshuffle">Перемешать</button>
+  </div>
+
+  <div class="stage" id="stage">
+    <div class="intro" id="intro" hidden>
+      <svg class="ico ico-sun intro-ico" aria-hidden="true"><use href="#i-sun"/></svg>
+      <h2>Перед первой картой</h2>
+      <ul class="intro-list">
+        <li>Правил нет, есть рекомендации. Цель в том, чтобы заметить, каким был этот год, и побыть в этом опыте рядом с близкими.</li>
+        <li>Отвечать любой ценой не нужно. Можно ответить коротко, можно надолго задуматься, можно пропустить карту или вернуться к ней позже.</li>
+        <li>Каждый участник может делиться своими мыслями, а может просто слушать. Важно давать друг другу время и не торопить.</li>
+      </ul>
+      <p class="intro-cite">Из правил Ксении Антипиной. <a class="link-quiet" href="#rules">Правила полностью</a></p>
+      <button type="button" class="btn btn-primary btn-wide" id="btn-intro">Понятно, начинаем</button>
+    </div>
+    <div class="spread spread-game" id="g-spread" hidden></div>
+    <div class="card" id="card">
+      <div class="card-inner" id="card-inner" role="group" aria-label="Карта">
+        <span class="card-side card-back"><img id="card-back-img" src="" alt=""></span>
+        <span class="card-side card-face" id="card-face">
+          <span class="face-frame">
+            <img class="face-icon top" id="face-top" src="" alt="">
+            <span class="face-text" id="face-text" tabindex="-1"></span>
+            <img class="face-icon bot" id="face-bot" src="" alt="">
+          </span>
+        </span>
+      </div>
+    </div>
+
+    <div class="deck-end" id="deck-end" hidden>
+      <svg class="hd hd-star end-star" aria-hidden="true"><use href="#hd-star"/></svg>
+      <h2>Вопросы закончились</h2>
+      <p>Спасибо за разговор.</p>
+      <button type="button" class="btn btn-primary" id="btn-again">Перемешать заново</button>
+      <button type="button" class="btn btn-ghost" id="btn-choose">Выбрать другие разделы</button>
+      <div class="end-offer">
+        <p id="end-offer-text">В печатной колоде 78 вопросов.</p>
+        <a class="link-quiet" href="#full">Узнать о печатной колоде</a>
+      </div>
+    </div>
+  </div>
+
+  <p class="tap-hint" id="tap-hint">Выберите любую карту</p>
+  <div class="minute" id="g-minute" hidden></div>
+
+  <div class="controls" id="controls">
+    <button type="button" class="btn btn-ghost" id="btn-prev">Назад</button>
+    <button type="button" class="btn btn-primary" id="btn-next">Следующая карта</button>
+  </div>
+</main>
+
+<!-- ===== Правила ===== -->
+<main id="screen-rules" class="screen page" hidden>
+  <div class="wrap narrow">
+    <a class="back" href="#game" id="rules-to-game" hidden>← Вернуться к игре</a>
+    <a class="back" href="#">← На главную</a>
+    <h1 class="page-title">Как играть</h1>
+
+    <p>Правил нет, есть рекомендации. Цель игры не в том, чтобы пройти колоду до конца и ответить на каждый вопрос. Цель в том, чтобы заметить, каким был этот год, и побыть в этом опыте рядом с близкими.</p>
+
+    <h2>Выбирайте карты так, как хочется</h2>
+    <p>Можно вытянуть одну карту на всех, можно по одной каждому, можно разложить несколько и выбрать ту, что больше нравится. Можно и не тянуть, а просто листать, читать и выбирать вопрос поинтереснее. Порядок и количество не важны.</p>
+
+    <h2>Отвечать любой ценой не нужно</h2>
+    <p>Вопрос не экзамен, а повод поразмышлять. Можно ответить коротко, можно надолго задуматься, можно пропустить карту или вернуться к ней позже. Ценность в самом размышлении: заметить, удивиться, присвоить и ассимилировать опыт.</p>
+
+    <h2>Слушайте и делитесь сами</h2>
+    <p>Каждый участник может делиться своими мыслями, а может просто слушать. Нет правильных и неправильных ответов, нет обязательных реакций. Важно давать друг другу время и не торопить.</p>
+
+    <h2>Новый год не единственный повод</h2>
+    <p>Колодой можно пользоваться в любую значимую дату: в день рождения, в годовщину свадьбы или знакомства, в день рождения детей, да и просто так, без повода. Подойдёт любой момент, когда хочется оглянуться и заметить свой опыт.</p>
+
+    <h2>В колоде три раздела</h2>
+    <ul class="sections">
+      <li><img src="img/common-top.svg" alt=""><span><b>Общие карты (54):</b> о годе, о себе, о том, что было важным и трудным. Подходят для любого круга и для разговора наедине с собой.</span></li>
+      <li><img src="img/pair-top.svg" alt=""><span><b>Для пары (12):</b> о близости, поддержке, общих воспоминаниях и мечтах двоих.</span></li>
+      <li><img src="img/family-top.svg" alt=""><span><b>Для семьи (12):</b> о традициях, общих историях и о том, что помогает чувствовать себя частью большой семьи.</span></li>
+    </ul>
+    <p>Не обязательно идти по порядку: можно брать карты из любого раздела и в любом количестве.</p>
+
+    <h2>Зачем это всё</h2>
+    <p>Нет времени, которое было бы неважным. Важно всё. Жизнь уже происходит, она не проходит мимо, она случается каждый день. Что её наполняет? Какие события стали значимыми? Где вы очень постарались, а в чём приходилось справляться? Важно давать себе время на ответ: думать, размышлять и предаваться удовольствию от сопричастности.</p>
+
+    <h2>Как устроена онлайн-версия</h2>
+    <p>В пробной онлайн-версии 20 вопросов: 12 общих, 4 для пары и 4 для семьи. Отметьте разделы и нажмите «Начать игру». На столе раскладываются до пяти карт рубашкой вверх: выберите любую, и она откроется. Карты не повторяются, пока не закончатся вопросы. Если закрыть страницу, игра продолжится с того же места. Телефон можно передавать по кругу.</p>
+
+    <a class="btn btn-primary" href="#play">Играть онлайн</a>
+  </div>
+</main>
+
+<!-- ===== Подвал ===== -->
+<footer class="site-footer wavy w2" id="site-footer">
+  <svg class="wave" aria-hidden="true"><use href="#wave-2"/></svg>
+  <div class="wrap footer-in">
+    <div class="f-brand">
+      <p class="f-title">Моменты года</p>
+      <p>Настольная игра-рефлексия</p>
+      <a class="btn btn-primary btn-sm" href="#play">Играть онлайн</a>
+    </div>
+    <nav class="f-nav" aria-label="Разделы">
+      <a href="#about" data-scroll>О проекте</a>
+      <a href="#how" data-scroll>Как играть</a>
+      <a href="#rules">Правила</a>
+      <a href="#decks" data-scroll>Разделы</a>
+      <a href="#author" data-scroll>Об авторе</a>
+      <a href="#full" data-scroll>Печатная колода</a>
+    </nav>
+    <div class="f-contacts">
+      <p class="f-label">Ксения Антипина</p>
+      <p>психолог, гештальт-терапевт</p>
+      <span class="link-soon">Телеграм (ссылка будет)</span>
+      <span class="link-soon">Почта (адрес будет)</span>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <p>Игра не заменяет консультацию психолога. Если вам сейчас тяжело, обратитесь к специалисту.</p>
+    <p>Сайт не собирает данные и не использует cookie. © 2026 Ксения Антипина</p>
+  </div>
+</footer>
+
+<!-- Карта из списка -->
+<div class="overlay" id="overlay" hidden>
+  <div class="overlay-card card is-flipped static">
+    <span class="card-side card-face">
+      <span class="face-frame">
+        <img class="face-icon top" id="ov-top" src="" alt="">
+        <span class="face-text" id="ov-text"></span>
+        <img class="face-icon bot" id="ov-bot" src="" alt="">
+      </span>
+    </span>
+  </div>
+  <button type="button" class="btn btn-ghost on-dark" id="ov-close">Закрыть</button>
+</div>
+
+<noscript><p class="noscript">Для игры нужен включённый JavaScript.</p></noscript>
+
+<script src="cards.js"></script>
+<script src="app.js"></script>
+<script src="home.js"></script>
+</body>
+</html>

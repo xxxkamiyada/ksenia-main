@@ -4,6 +4,7 @@
   --secondary: #485349;
   --accent: #2b4838;
   --line: #d4d9cf;
+  --header-height: 4.5rem;
   --display: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   color: var(--ink);
   background: var(--paper);
@@ -11,24 +12,35 @@
   line-height: 1.55;
 }
 * { box-sizing: border-box; }
+html { scroll-padding-top: var(--header-height); }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
 body, h1, h2, h3, p, dl, dd, ul { margin: 0; }
 p { text-wrap: pretty; }
 a { color: inherit; text-underline-offset: .23em; }
 a:hover { text-decoration-thickness: 2px; }
 a:focus-visible { outline: 2px solid #9c5b37; outline-offset: 5px; }
-.skip { position: fixed; top: -5rem; left: 1rem; z-index: 2; padding: .55rem 1rem; background: white; }
+.skip { position: fixed; top: -5rem; left: 1rem; z-index: 11; padding: .55rem 1rem; background: white; }
 .skip:focus { top: 1rem; }
 .wrap { width: min(68rem, calc(100% - 4rem)); margin-inline: auto; }
-.header { display: flex; align-items: center; justify-content: space-between; gap: .75rem 2rem; padding-block: 1rem; border-bottom: 1px solid var(--line); }
-.brand { font-size: 1.12rem; font-weight: 670; text-decoration: none; }
-.header nav { display: flex; flex-wrap: wrap; gap: .15rem clamp(.75rem, 3vw, 2rem); }
-.header nav a { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--secondary); text-decoration: none; }
-.header nav a:hover, .brand:hover { text-decoration: underline; }
+.header { position: sticky; top: 0; z-index: 10; height: var(--header-height); border-bottom: 1px solid var(--line); background: var(--paper); }
+.header-inner { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 1rem; height: 100%; }
+.brand { display: grid; justify-self: start; gap: .16rem; line-height: 1.2; text-decoration: none; color: var(--accent); }
+.brand-name { font-size: 1.08rem; font-weight: 680; }
+.brand-role { color: var(--secondary); font-size: .81rem; }
+.site-navigation { display: flex; gap: clamp(1rem, 2.25vw, 1.8rem); }
+.section-link { display: inline-flex; align-items: center; min-height: 2.75rem; position: relative; color: var(--secondary); font-size: .96rem; text-decoration: none; white-space: nowrap; }
+.section-link::after { content: ''; position: absolute; inset: auto 0 0; height: 2px; background: transparent; }
+.section-link:hover, .section-link[aria-current] { color: var(--accent); }
+.section-link:hover::after, .section-link[aria-current]::after { background: #708478; }
+.header .button { font-size: .94rem; padding: .63rem 1.1rem; box-shadow: 2px 3px 0 #dce4d7; }
+.header-booking { justify-self: end; }
+.menu-toggle, .header .menu-booking { display: none; }
 .hero { display: grid; grid-template-columns: 1.16fr 1fr; align-items: center; gap: clamp(2rem, 6vw, 6rem); padding-block: clamp(2.8rem, 6vw, 5rem); }
 h1, h2, .project h3 { font-family: var(--display); font-weight: 610; letter-spacing: -.045em; }
 h1 { font-size: clamp(3.3rem, 7.5vw, 6.75rem); line-height: .94; margin-bottom: 1.35rem; }
 .lead { font-size: clamp(1.125rem, 2vw, 1.325rem); max-width: 27rem; color: var(--secondary); text-wrap: balance; }
-.lead + .lead { margin-top: .45rem; }
 .actions { display: flex; flex-wrap: wrap; align-items: center; gap: .85rem 1.4rem; margin-top: 1.7rem; }
 .button { display: inline-flex; align-items: center; justify-content: center; padding: .75rem 1.25rem; color: white; background: var(--accent); border-radius: 999px; text-decoration: none; font-weight: 600; }
 .button:hover { background: #254232; }
@@ -69,9 +81,22 @@ h2 { font-size: clamp(2.4rem, 5vw, 3.45rem); line-height: 1.02; margin-bottom: 1
 .links { display: flex; flex-wrap: wrap; gap: 0 1.25rem; margin-top: .4rem; }
 .links a, .resources a { display: inline-flex; align-items: center; min-height: 2.75rem; }
 .resources { list-style: none; padding: 0; }
+@media (max-width: 840px) {
+  :root { --header-height: 4rem; }
+  .header-inner { grid-template-columns: 1fr auto auto; column-gap: .65rem; }
+  .menu-toggle { grid-column: 3; grid-row: 1; display: grid; place-content: center; gap: 4px; width: 2.75rem; height: 2.75rem; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: var(--paper); color: var(--accent); cursor: pointer; }
+  .menu-toggle span { display: block; width: 1rem; height: 1px; background: currentColor; }
+  .menu-toggle[aria-expanded="true"] span:first-child { transform: translateY(5px) rotate(45deg); }
+  .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .menu-toggle[aria-expanded="true"] span:last-child { transform: translateY(-5px) rotate(-45deg); }
+  .menu-toggle:focus-visible { outline: 2px solid #9c5b37; outline-offset: 3px; }
+  .header-booking { grid-column: 2; grid-row: 1; }
+  .site-navigation { display: none; position: absolute; inset: 100% 0 auto; padding: .4rem max(1.25rem, calc((100% - 68rem) / 2)) 1rem; border-bottom: 1px solid var(--line); background: var(--paper); box-shadow: 0 10px 22px #242b2314; max-height: calc(100dvh - var(--header-height)); overflow: auto; }
+  .menu-toggle[aria-expanded="true"] + .site-navigation { display: grid; gap: .1rem; }
+  .site-navigation .section-link { width: fit-content; }
+}
 @media (max-width: 730px) {
   .wrap { width: calc(100% - 2.5rem); }
-  .header { align-items: flex-start; flex-direction: column; gap: 0; padding-block: .85rem .25rem; }
   .hero, .practice, .projects, .footer-inner { grid-template-columns: 1fr; }
   .hero { padding-block: 2.5rem; gap: 1.8rem; }
   h1 { font-size: clamp(3rem, 12vw, 5rem); }
@@ -80,6 +105,9 @@ h2 { font-size: clamp(2.4rem, 5vw, 3.45rem); line-height: 1.02; margin-bottom: 1
   .credential { height: clamp(12rem, 41vw, 16rem); }
   .project { margin-top: -.25rem; }
 }
-@media (max-width: 370px) {
-  .header nav { gap: 0 .65rem; font-size: .875rem; }
+@media (max-width: 430px) {
+  .header-inner { grid-template-columns: 1fr auto; }
+  .menu-toggle { grid-column: 2; }
+  .header .header-booking { display: none; }
+  .header .menu-booking { display: inline-flex; justify-self: start; margin-top: .5rem; }
 }

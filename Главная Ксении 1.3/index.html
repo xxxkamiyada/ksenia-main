@@ -6,25 +6,35 @@
   <meta name="theme-color" content="#f7f7f2">
   <meta name="description" content="Ксения Антипина, психолог, аккредитованный гештальт-терапевт, семейный терапевт и супервизор. Индивидуальная терапия и работа с парами.">
   <title>Ксения Антипина, психолог и гештальт-терапевт</title>
-  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="main.css?v=1.6">
 </head>
-<body>
+<body id="top">
   <a class="skip" href="#main">К содержанию</a>
-  <header class="wrap header" id="top">
-    <a class="brand" href="#top">Ксения Антипина</a>
-    <nav aria-label="Разделы страницы">
-      <a href="#practice">Практика</a>
-      <a href="#education">Образование</a>
-      <a href="#projects">Проекты</a>
-      <a href="#contacts">Контакты</a>
-    </nav>
+  <header class="header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top">
+        <span class="brand-name">Ксения Антипина</span>
+        <span class="brand-role">психолог, гештальт‑терапевт</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Меню" aria-expanded="false" aria-controls="site-navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-navigation" id="site-navigation" aria-label="Разделы страницы">
+        <a class="section-link" href="#practice">Практика</a>
+        <a class="section-link" href="#education">Образование</a>
+        <a class="section-link" href="#projects">Проекты</a>
+        <a class="section-link" href="#contacts">Контакты</a>
+        <a class="button menu-booking" href="https://t.me/antipinaksenia">Записаться</a>
+      </nav>
+      <a class="button header-booking" href="https://t.me/antipinaksenia">Записаться</a>
+    </div>
   </header>
   <main id="main" class="wrap">
     <section class="hero" aria-labelledby="intro-title">
       <div class="intro">
         <h1 id="intro-title">Ксения<br>Антипина</h1>
-        <p class="lead">Психолог и&nbsp;семейный терапевт с&nbsp;аккредитацией по&nbsp;гештальт-терапии.</p>
-        <p class="lead">Работаю индивидуально и&nbsp;с&nbsp;парами.</p>
+        <p class="lead">Психолог и&nbsp;семейный терапевт с&nbsp;аккредитацией по&nbsp;гештальт-терапии.<br>
+          Работаю индивидуально и&nbsp;с&nbsp;парами.</p>
         <div class="actions">
           <a class="button" href="https://t.me/antipinaksenia">Записаться в&nbsp;Telegram</a>
           <a class="text-link" href="#practice">Форматы и&nbsp;стоимость</a>
@@ -35,10 +45,10 @@
       </div>
     </section>
 
-    <section class="section practice" id="practice" aria-labelledby="practice-title">
+    <section class="section practice" id="practice" aria-labelledby="practice-title" tabindex="-1">
       <div>
         <h2 id="practice-title">Практика</h2>
-        <p>В&nbsp;работе опираюсь на&nbsp;гештальт-подход, а&nbsp;с&nbsp;парами также использую ЭФТ (эмоционально-фокусированную терапию).</p>
+        <p>В&nbsp;работе опираюсь на&nbsp;гештальт-подход, а&nbsp;с&nbsp;парами также использую ЭФТ (эмоционально&#8209;фокусированную терапию).</p>
         <p>Для&nbsp;меня важны доверие, уважение и&nbsp;поддержка в&nbsp;тех изменениях, к&nbsp;которым вы&nbsp;стремитесь. Я&nbsp;также веду группы и&nbsp;провожу супервизии.</p>
       </div>
       <div class="fees">
@@ -64,7 +74,7 @@
       </div>
     </section>
 
-    <section class="section education" id="education" aria-labelledby="education-title">
+    <section class="section education" id="education" aria-labelledby="education-title" tabindex="-1">
       <div class="education-header">
         <h2 id="education-title">Дипломы и&nbsp;сертификаты</h2>
         <div class="carousel-controls" hidden>
@@ -86,19 +96,19 @@
       </ul>
     </section>
 
-    <section class="section projects" id="projects" aria-labelledby="projects-title">
+    <section class="section projects" id="projects" aria-labelledby="projects-title" tabindex="-1">
       <h2 id="projects-title">Проекты</h2>
       <div class="project">
         <div>
           <h3>Моменты&nbsp;года</h3>
           <p>Настольная игра с&nbsp;вопросами о&nbsp;прожитом годе. Можно играть с&nbsp;близкими или&nbsp;наедине с&nbsp;собой.</p>
         </div>
-        <a class="text-link" id="game-link" href="momenty-goda/">К&nbsp;игре «Моменты&nbsp;года»</a>
+        <a class="text-link" id="game-link" href="https://kseniaantipina.ru/momenty-goda" target="_top">К&nbsp;игре «Моменты&nbsp;года»</a>
       </div>
     </section>
   </main>
 
-  <footer class="footer" id="contacts">
+  <footer class="footer" id="contacts" tabindex="-1">
     <div class="wrap footer-inner">
       <div>
         <h2>Контакты</h2>
@@ -125,9 +135,60 @@
   </dialog>
 
   <script>
-    if (location.protocol === 'file:') {
-      document.getElementById('game-link').href = 'momenty-goda/index.html';
+    const header = document.querySelector('.header');
+    const menuToggle = header.querySelector('.menu-toggle');
+    const navigation = document.getElementById('site-navigation');
+    const sectionLinks = [...navigation.querySelectorAll('.section-link')];
+    const sections = sectionLinks.map(link => document.querySelector(link.hash));
+
+    function setMenu(open) {
+      menuToggle.setAttribute('aria-expanded', String(open));
     }
+
+    menuToggle.addEventListener('click', () => {
+      setMenu(menuToggle.getAttribute('aria-expanded') === 'false');
+    });
+    header.querySelector('.brand').addEventListener('click', () => setMenu(false));
+    navigation.addEventListener('click', (event) => {
+      const link = event.target.closest('a');
+      if (!link) return;
+      setMenu(false);
+      const section = sections[sectionLinks.indexOf(link)];
+      if (section && menuToggle.offsetWidth) section.focus({ preventScroll: true });
+    });
+    document.addEventListener('click', (event) => {
+      if (!header.contains(event.target) && menuToggle.getAttribute('aria-expanded') === 'true') setMenu(false);
+    });
+    header.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+        setMenu(false);
+        menuToggle.focus();
+      }
+    });
+
+    function updateCurrentSection() {
+      const line = header.offsetHeight + 20;
+      const bottom = document.documentElement.scrollHeight - window.innerHeight;
+      let active = sections.findIndex(section => section.id === location.hash.slice(1));
+      const anchorAtBottom = active !== -1 && window.scrollY > 0 && window.scrollY >= bottom - 1
+        && sections[active].getBoundingClientRect().top >= line - 4;
+      if (!anchorAtBottom) {
+        active = -1;
+        sections.forEach((section, index) => {
+          if (section.getBoundingClientRect().top <= line) active = index;
+        });
+      }
+      sectionLinks.forEach((link, index) => {
+        if (index === active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    }
+
+    updateCurrentSection();
+    window.addEventListener('scroll', updateCurrentSection, { passive: true });
+    window.addEventListener('hashchange', updateCurrentSection);
+    window.addEventListener('resize', updateCurrentSection);
+    matchMedia('(min-width: 841px)').addEventListener('change', () => setMenu(false));
 
     const track = document.getElementById('credential-track');
     const controls = document.querySelector('.carousel-controls');

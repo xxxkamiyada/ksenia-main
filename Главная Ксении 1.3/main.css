@@ -12,6 +12,7 @@
 }
 * { box-sizing: border-box; }
 body, h1, h2, h3, p, dl, dd, ul { margin: 0; }
+p { text-wrap: pretty; }
 a { color: inherit; text-underline-offset: .23em; }
 a:hover { text-decoration-thickness: 2px; }
 a:focus-visible { outline: 2px solid #9c5b37; outline-offset: 5px; }
@@ -26,7 +27,8 @@ a:focus-visible { outline: 2px solid #9c5b37; outline-offset: 5px; }
 .hero { display: grid; grid-template-columns: 1.16fr 1fr; align-items: center; gap: clamp(2rem, 6vw, 6rem); padding-block: clamp(2.8rem, 6vw, 5rem); }
 h1, h2, .project h3 { font-family: var(--display); font-weight: 610; letter-spacing: -.045em; }
 h1 { font-size: clamp(3.3rem, 7.5vw, 6.75rem); line-height: .94; margin-bottom: 1.35rem; }
-.lead { font-size: clamp(1.125rem, 2vw, 1.325rem); max-width: 27rem; color: var(--secondary); }
+.lead { font-size: clamp(1.125rem, 2vw, 1.325rem); max-width: 27rem; color: var(--secondary); text-wrap: balance; }
+.lead + .lead { margin-top: .45rem; }
 .actions { display: flex; flex-wrap: wrap; align-items: center; gap: .85rem 1.4rem; margin-top: 1.7rem; }
 .button { display: inline-flex; align-items: center; justify-content: center; padding: .75rem 1.25rem; color: white; background: var(--accent); border-radius: 999px; text-decoration: none; font-weight: 600; }
 .button:hover { background: #254232; }
